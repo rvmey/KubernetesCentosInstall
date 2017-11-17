@@ -64,5 +64,7 @@ echo Use the Skip button to login.
 echo .
 echo In the meantime you could open another SSH session and start running kubectl commands.
 echo Or merge your the context in /etc/kubernetes/admin.conf YAML with your local ~/.kube/config file so you can run kubectl commands against your new cluster from there.
+echo .
+echo If you need to re-run the proxy to get into the GUI, run:  kubectl proxy --address `hostname -I` --accept-hosts '.*'
 
 kubectl proxy --address `hostname -I` --accept-hosts '.*'
