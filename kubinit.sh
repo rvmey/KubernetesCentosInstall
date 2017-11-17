@@ -58,7 +58,11 @@ EOF
 kubectl create -f /root/insecuredashboard.yml
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/master/src/deploy/recommended/kubernetes-dashboard.yaml
 
-echo The GUI should be available soon at http://`hostname`:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy
+echo .
+echo The GUI should be available in about 15 minutes at http://`hostname`:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy
 echo Use the Skip button to login.
+echo .
+echo In the meantime you could open another SSH session and start running kubectl commands.
+echo Or merge your the context in /etc/kubernetes/admin.conf YAML with your local ~/.kube/config file so you can run kubectl commands against your new cluster from there.
 
 kubectl proxy --address `hostname -I` --accept-hosts '.*'
