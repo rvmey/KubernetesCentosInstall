@@ -7,3 +7,6 @@ curl https://raw.githubusercontent.com/rvmey/KubernetesCentosInstall/master/kubi
 chmod +x kubinit.sh
 
 sudo ./kubinit.sh
+
+
+This installs a single node Kubernetes cluster.
