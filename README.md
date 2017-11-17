@@ -6,4 +6,4 @@ curl https://raw.githubusercontent.com/rvmey/KubernetesCentosInstall/master/kubi
 
 chmod +x kubinit.sh
 
-sudo ./kubinit.sh
+./kubinit.sh
