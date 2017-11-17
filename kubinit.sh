@@ -29,8 +29,6 @@ sysctl net.bridge.bridge-nf-call-iptables=1
 
 kubeadm init --pod-network-cidr=10.244.0.0/16
 
-kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/v0.9.0/Documentation/kube-flannel.yml
-
 rm -rf $HOME/.kube
 mkdir -p $HOME/.kube
 cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
