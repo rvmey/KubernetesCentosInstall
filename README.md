@@ -1,4 +1,4 @@
-# Single-node Kubernetes Centos Install
+# Single-node Kubernetes CentOS Install
 
 Start with a minimal install of CentOS
 
