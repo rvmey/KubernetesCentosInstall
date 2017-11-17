@@ -1,7 +1,4 @@
 # Kubernetes Centos Install
-Kubernetes on Centos install script
-
-Instructions:  
 
 Start with a minimal install of CentOS
 
