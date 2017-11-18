@@ -58,6 +58,11 @@ EOF
 kubectl create -f /root/insecuredashboard.yml
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/master/src/deploy/recommended/kubernetes-dashboard.yaml
 
+curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get > get_helm.sh
+chmod 700 get_helm.sh
+./get_helm.sh
+helm install --name nginxchart stable/nginx-ingress --set controller.hostNetwork=true --set rbac.create=true
+
 echo .
 echo The GUI should be available in about 15 minutes at http://`hostname`:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy
 echo Use the Skip button to login.
