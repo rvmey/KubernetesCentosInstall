@@ -14,8 +14,12 @@ EOF
 yum install -y docker kubelet kubeadm kubectl etcd flannel
 
 echo `hostname -I` `hostname` >> /etc/hosts
+
 swapoff -a
+sed -i.bak '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab
+
 setenforce 0
+sed -i 's/^SELINUX=.*/SELINUX=disabled/g' /etc/selinux/config
 
 systemctl enable docker
 systemctl start docker
@@ -34,9 +38,12 @@ mkdir -p $HOME/.kube
 cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 chown $(id -u):$(id -g) $HOME/.kube/config
 
-kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
-
 kubectl taint node --all=true node-role.kubernetes.io/master:NoSchedule-
+
+# kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/k8s-manifests/kube-flannel-rbac.yml
+# kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/k8s-manifests/kube-flannel-legacy.yml
+
+kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
 
 cat <<EOF > /root/insecuredashboard.yml
 kind: ClusterRoleBinding
@@ -69,6 +76,8 @@ echo In the meantime you could open another SSH session and start running kubect
 echo Or merge your the context in /etc/kubernetes/admin.conf YAML with your local ~/.kube/config file so you can run kubectl commands against your new cluster from there.
 echo .
 echo If you need to re-run the proxy to get into the GUI, run:  kubectl proxy --address `hostname -I` --accept-hosts '.*'
+
+echo Also, make sure you disable SELinux in /etc/sysconfig/selinux before you reboot.
 
 kubectl get pods --all-namespaces
 
