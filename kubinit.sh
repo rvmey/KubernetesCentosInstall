@@ -63,6 +63,22 @@ kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/master/s
 curl https://raw.githubusercontent.com/kubernetes/helm/master/scripts/get > get_helm.sh
 chmod 700 get_helm.sh
 ./get_helm.sh
+
+# The following command is gives too much access to the default service account, but it allows helm to create the nginx ingress controller.
+kubectl create clusterrolebinding --user system:serviceaccount:kube-system:default kube-system-cluster-admin --clusterrole cluster-admin
+
+helm init
+echo Waiting for tiller pod to run before running helm command to create the nginx ingress controller
+while true; do
+  kubectl get pods --all-namespaces | grep tiller | grep Running
+  if [ $? -ne 0 ]; then
+    echo "Still waiting..."
+  else
+    break
+  fi
+  sleep 5
+done
+
 helm install --name nginxchart stable/nginx-ingress --set controller.hostNetwork=true --set rbac.create=true
 
 echo .
