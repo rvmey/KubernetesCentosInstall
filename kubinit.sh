@@ -40,9 +40,6 @@ chown $(id -u):$(id -g) $HOME/.kube/config
 
 kubectl taint node --all=true node-role.kubernetes.io/master:NoSchedule-
 
-# kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/k8s-manifests/kube-flannel-rbac.yml
-# kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/k8s-manifests/kube-flannel-legacy.yml
-
 kubectl apply -f https://raw.githubusercontent.com/coreos/flannel/master/Documentation/kube-flannel.yml
 
 cat <<EOF > /root/insecuredashboard.yml
