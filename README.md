@@ -1,4 +1,4 @@
-# Single-node Kubernetes CentOS Install including an Nginx based ingress controller
+# Single-node Kubernetes CentOS install including an Nginx based ingress controller
 
 Start with a minimal install of CentOS
 
