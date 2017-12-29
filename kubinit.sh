@@ -11,7 +11,7 @@ gpgcheck=1
 repo_gpgcheck=1
 gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
 EOF
-yum install -y docker kubelet kubeadm kubectl etcd flannel
+yum install -y docker kubelet-1.8.3 kubeadm kubectl etcd flannel
 
 echo `hostname -I` `hostname` >> /etc/hosts
 
@@ -31,7 +31,7 @@ systemctl stop firewalld
 
 sysctl net.bridge.bridge-nf-call-iptables=1
 
-kubeadm init --pod-network-cidr=10.244.0.0/16
+kubeadm init --pod-network-cidr=10.244.0.0/16 --kubernetes-version=1.8.3
 
 rm -rf $HOME/.kube
 mkdir -p $HOME/.kube
