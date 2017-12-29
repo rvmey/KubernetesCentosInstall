@@ -11,7 +11,8 @@ gpgcheck=1
 repo_gpgcheck=1
 gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
 EOF
-yum install -y docker kubelet-1.8.3 kubeadm kubectl etcd flannel
+yum install -y kubelet-1.8.3
+yum install -y docker kubeadm kubectl etcd flannel
 
 echo `hostname -I` `hostname` >> /etc/hosts
 
@@ -29,7 +30,12 @@ systemctl start kubelet
 systemctl disable firewalld
 systemctl stop firewalld
 
-sysctl net.bridge.bridge-nf-call-iptables=1
+cat <<__EOF__ >  /etc/sysctl.d/k8s.conf
+net.bridge.bridge-nf-call-ip6tables = 1
+net.bridge.bridge-nf-call-iptables = 1
+__EOF__
+sysctl --system
+sysctl -p /etc/sysctl.d/k8s.conf
 
 kubeadm init --pod-network-cidr=10.244.0.0/16 --kubernetes-version=1.8.3
 
