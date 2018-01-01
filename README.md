@@ -7,3 +7,5 @@ curl https://raw.githubusercontent.com/rvmey/KubernetesCentosInstall/master/kubi
 chmod +x kubinit.sh
 
 ./kubinit.sh
+
+Use kubworker.sh to add worker nodes.
