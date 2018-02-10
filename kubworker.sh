@@ -11,7 +11,7 @@ gpgcheck=1
 repo_gpgcheck=1
 gpgkey=https://packages.cloud.google.com/yum/doc/yum-key.gpg https://packages.cloud.google.com/yum/doc/rpm-package-key.gpg
 EOF
-yum install kubelet-1.8.3
+yum install -y kubelet-1.8.3
 yum install -y docker kubectl kubeadm etcd flannel
 yum install -y kubeadm
 
